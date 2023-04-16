@@ -8,3 +8,4 @@
 ## 解說
 - sample 01 : 仿API形式
 - sample 02 : 仿redis、長連線形式
+- sample 03 : 仿redis connect pool
