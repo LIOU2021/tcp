@@ -34,22 +34,6 @@ func (p *ConnPool) CreatePool() {
 	}
 }
 
-// func (p *ConnPool) CreateOne() (con *connWithTime, err error) {
-// conn, err := p.Dial()
-// if err != nil {
-// 	return
-// }
-
-// con = &connWithTime{
-// 	Conn: conn,
-// 	t:    time.Now(),
-// }
-
-// p.conns = append(p.conns, con)
-
-// return
-// }
-
 func (p *ConnPool) Get() (net.Conn, error) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
