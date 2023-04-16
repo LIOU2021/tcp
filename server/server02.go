@@ -7,6 +7,9 @@ import (
 )
 
 func connHandler(c net.Conn) {
+	fmt.Printf("Connect  %s >> %s\n", c.RemoteAddr(), c.LocalAddr())
+	defer fmt.Printf("Connection from %v closed. \n", c.RemoteAddr())
+
 	if c == nil {
 		return
 	}
@@ -32,8 +35,8 @@ func connHandler(c net.Conn) {
 			fmt.Printf("Unsupported command: %s\n", inputs[0])
 		}
 	}
-	fmt.Printf("Connection from %v closed. \n", c.RemoteAddr())
 }
+
 func main() {
 	address := "127.0.0.1:8000"
 	fmt.Printf("listen: %s\n", address)
