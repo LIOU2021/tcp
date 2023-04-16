@@ -21,7 +21,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		fmt.Println("new connection")
+		fmt.Printf("new connection: %s\n", conn.RemoteAddr().String())
 		// Handle the connection in a separate goroutine.
 		go func(conn net.Conn) {
 			defer conn.Close()

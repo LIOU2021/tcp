@@ -11,6 +11,7 @@ func main() {
 	defer fmt.Println("client end")
 	for i := 0; i < 3; i++ {
 		conn, err := net.Dial("tcp", "localhost:8000")
+		defer conn.Close()
 		if err != nil {
 			log.Fatal(err)
 		}
