@@ -28,9 +28,6 @@ func main() {
 			log.Fatal(err)
 		}
 
-		// fmt.Println(string(buf[:n]))
-
-		_ = n
-		fmt.Println(string(buf))
+		fmt.Println(string(buf[:n]))
 	}
 }
