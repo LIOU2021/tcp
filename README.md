@@ -9,3 +9,7 @@
 - sample 01 : 仿API形式
 - sample 02 : 仿redis、長連線形式
 - sample 03 : 仿redis connect pool
+
+## tcp pool pkg
+- 我後來有把tcp pool額外寫成pkg
+    - https://github.com/LIOU2021/tcp-pool
