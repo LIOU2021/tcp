@@ -5,13 +5,24 @@ import (
 	"log"
 	"net"
 	"strings"
+	"sync"
 	"time"
 )
 
 func connHandler(c net.Conn) {
+	var closeOnce sync.Once
 	fmt.Printf("Connect  %s >> %s\n", c.RemoteAddr(), c.LocalAddr())
+	closeFunc := func() {
+		closeOnce.Do(func() {
+			err := c.Close()
+			if err != nil {
+				log.Println("close error: ", err)
+			}
+		})
+	}
 	defer func() {
 		fmt.Printf("Connection from %v closed. \n", c.RemoteAddr())
+		closeFunc()
 	}()
 
 	readWriteCh := make(chan struct{}, 100)
@@ -21,7 +32,7 @@ func connHandler(c net.Conn) {
 			case <-time.After(5 * time.Second):
 				log.Println(c.RemoteAddr(), ":超过5秒没收到心跳")
 				close(readWriteCh) // 关闭心跳机制
-				c.Close()
+				closeFunc()
 				return
 			case <-readWriteCh:
 				log.Println(c.RemoteAddr(), ":收到讯息")
@@ -37,7 +48,6 @@ func connHandler(c net.Conn) {
 		cnt, err := c.Read(buf)
 		log.Println("c.Read: ", string(buf[0:cnt]), "cnt:", cnt, "err:", err)
 		if err != nil || cnt == 0 {
-			c.Close()
 			break
 		}
 
