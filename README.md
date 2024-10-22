@@ -9,6 +9,7 @@
 - sample 01 : 仿API形式
 - sample 02 : 仿redis、長連線形式
 - sample 03 : 仿redis connect pool
+- sample 04 : tcp 长连线模式下有心跳机制验证客户端是否存活
 
 ## tcp pool pkg
 - 我後來有把tcp pool額外寫成pkg
